@@ -1,12 +1,14 @@
-#include "botao.h"
-#include "matriz_Led.h"
+#include "include/botao.h"
 #include <stdio.h>
 #include <string.h>
+#include "include/oled.h"
 
 int numeral = 0;
 static absolute_time_t last_interrupt_time_botao1 = 0;
 static absolute_time_t last_interrupt_time_botao2 = 0;
 static const uint64_t debounce_time_ms = 200;
+
+extern ssd1306_t ssd;  // O objeto do display deve estar declarado em outro arquivo
 
 void botoes_init(void) {
 
@@ -33,24 +35,54 @@ void botoes_init(void) {
 
 // Função de interrupção dos botões
 static void interrupcao(uint gpio, uint32_t events) {
-    int b1 = 0;
-    int b2 = 0;
+ 
     absolute_time_t current_time = get_absolute_time();
 
-    if (gpio == BOTAO1 && b1 == 0) 
+    if (gpio == BOTAO1) 
     { 
         if (absolute_time_diff_us(last_interrupt_time_botao1, current_time) < debounce_time_ms * 1000) return;
+
+        last_interrupt_time_botao1 = current_time;
         gpio_put(RED_LED, 0);
         gpio_put(GREEN_LED, !gpio_get(GREEN_LED));
         gpio_put(BLUE_LED, 0);
-        b1 = 1;
+        if(gpio_get(GREEN_LED))
+        {
+            printf("Led verde Ligado\n");
+            ssd1306_draw_string(&ssd, "Led Verde ", 8, 30);
+            ssd1306_draw_string(&ssd, "Ligado   ", 8, 40);
+            ssd1306_send_data(&ssd);
+        }
+        else
+        {
+            printf("Led verde desligado\n");
+            ssd1306_draw_string(&ssd, "Led Verde ", 8, 30);
+            ssd1306_draw_string(&ssd, "Desligado", 8, 40);
+            ssd1306_send_data(&ssd);
+        }
     } 
-    else if(gpio == BOTAO2 && b2 == 0) 
+    else if(gpio == BOTAO2) 
     { 
         if (absolute_time_diff_us(last_interrupt_time_botao2, current_time) < debounce_time_ms * 1000) return;
+
+        last_interrupt_time_botao2 = current_time;
         gpio_put(RED_LED, 0);
         gpio_put(GREEN_LED, 0);
         gpio_put(BLUE_LED, !gpio_get(BLUE_LED));
-        b2 = 1;
+
+        if(gpio_get(BLUE_LED))
+        {
+            printf("Led azul Ligado\n");
+            ssd1306_draw_string(&ssd, "Led Azul ", 8, 30);
+            ssd1306_draw_string(&ssd, "Ligado   ", 8, 40);
+            ssd1306_send_data(&ssd);
+        }
+        else 
+        {
+            printf("Led azul desligado\n");
+            ssd1306_draw_string(&ssd, "Led Azul", 8, 30);
+            ssd1306_draw_string(&ssd, "Desligado", 8, 40);
+            ssd1306_send_data(&ssd);
+        }
     }
 }

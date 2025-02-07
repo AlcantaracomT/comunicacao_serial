@@ -2,15 +2,16 @@
 #include <stdlib.h>
 #include "pico/stdlib.h"
 #include "pico/bootrom.h"
-#include "oled.h"
-#include "matriz_Led.h"
-#include "botao.h"
+#include "include/oled.h"
+#include "include/matriz_Led.h"
+#include "include/botao.h"
+
+ssd1306_t ssd;  // Estrutura do display global
 
 int main() {
   char letra;
   stdio_init_all();
 
-  ssd1306_t ssd;  // Estrutura do display
   oled_init(&ssd); // Inicializa o OLED
 
   bool cor = true;

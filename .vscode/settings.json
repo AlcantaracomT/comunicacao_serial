@@ -38,6 +38,8 @@
     "raspberry-pi-pico.ninjaPath": "${HOME}/.pico-sdk/ninja/v1.12.1/ninja",
     "files.associations": {
         "matriz_led.h": "c",
-        "botao.h": "c"
+        "botao.h": "c",
+        "bootrom.h": "c",
+        "stdio.h": "c"
     }
 }

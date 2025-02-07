@@ -1,9 +1,9 @@
-#include "matriz_Led.h"
+#include "include/matriz_Led.h"
 
 // Variáveis globais para cores
-uint8_t led_r = 10;
-uint8_t led_g = 0;
-uint8_t led_b = 10;
+uint8_t led_r = 255;
+uint8_t led_g = 255;
+uint8_t led_b = 0;
 
 // Buffer para armazenar quais LEDs estão acesos
 bool led_buffer[NUM_PIXELS];

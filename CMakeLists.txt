@@ -35,7 +35,7 @@ pico_sdk_init()
 
 # Add executable. Default name is the project name, version 0.1
 
-add_executable(comunicar comunicar.c ssd1306.c oled.c matriz_Led.c botao.c)
+add_executable(comunicar comunicar.c src/ssd1306.c src/oled.c src/matriz_Led.c src/botao.c)
 
 pico_set_program_name(comunicar "comunicar")
 pico_set_program_version(comunicar "0.1")
