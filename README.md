@@ -22,9 +22,13 @@ Este projeto utiliza a placa **BitDogLab** para controlar uma matriz de LEDs, um
 
 ### 3. Interação com o Botão A
 - Pressionar o **Botão A** alterna o estado do **LED RGB Verde** (ligado/desligado).
+- Printa no terminal serial "Led Verde Ligado/Desligado"
+- Printa na Oled ssd1306 "Led Verde Ligado/Desligado"
 
 ### 4. Interação com o Botão B
 - Pressionar o **Botão B** alterna o estado do **LED RGB Azul** (ligado/desligado).
+- Printa no terminal serial "Led Azul Ligado/Desligado"
+- Printa na Oled ssd1306 "Led Azul Ligado/Desligado"
 
 ## Requisitos
 - Placa **BitDogLab**.
